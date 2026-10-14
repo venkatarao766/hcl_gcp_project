@@ -1,0 +1,19 @@
+Phase 2 Architecture & Execution Flow
+
+[ GCS: Multi-Entity Raw Files ] 
+        │
+        ▼ (Dataproc / PySpark)
+┌──────────────────────────────────────────────┐
+│  1. Read text file line-by-line              │
+│  2. Identify block headers & parse records   │
+│  3. Attach audit metadata & source_day       │
+└──────────────────────────────────────────────┘
+        │
+        ├──────────────────────┬──────────────────────┐
+        ▼                      ▼                      ▼
+ [ Bronze Customers ]   [ Bronze Accounts ]   [ Bronze Transactions ]
+ (Upsert / Deduplicate) (Upsert / Deduplicate) (Preserved if missing)
+        │
+        └──────────────────────┬──────────────────────┘
+                               ▼
+                    [ Bronze Ingestion Audit ]

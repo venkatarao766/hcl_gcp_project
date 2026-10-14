@@ -1,0 +1,9 @@
+---How to Submit the Dataproc Job ---
+
+gcloud dataproc jobs submit pyspark gs://hcl_hackathaon/scripts/load_gcs_to_bronze_pipeline.py \
+    --cluster=bronze-ingestion-cluster \
+    --region=us-central1 \
+    -- \
+    project-d058df44-4eb1-4f05-8b3 \
+    gs://hcl_hackathaon/raw/day_1.txt \
+    Day_1
